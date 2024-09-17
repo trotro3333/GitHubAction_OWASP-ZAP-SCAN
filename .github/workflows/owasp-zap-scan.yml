@@ -15,6 +15,6 @@ jobs:
         uses: zaproxy/action-baseline@v0.6.1
         with:
           docker_name: 'zaproxy/zap-stable'
-          target: 'https://www.hackthissite.org/'
+          target: 'http://192.168.1.145/bWAPP/htmli_get.php'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
