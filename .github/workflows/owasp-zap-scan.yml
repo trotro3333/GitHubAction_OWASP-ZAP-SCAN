@@ -18,5 +18,6 @@ jobs:
       - name: Start OWASP ZAP Scan
         uses: zaproxy/action-baseline@v0.6.1
         with:
+          docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
           cmd_options: '-config api.disablekey=true'
