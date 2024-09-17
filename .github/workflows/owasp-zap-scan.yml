@@ -1,6 +1,12 @@
 name: OWASP ZAP Integration with GitHub Actions
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   zap_scan:
@@ -18,4 +24,4 @@ jobs:
           target: 'http://testphp.vulnweb.com/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-config api.disablekey=true'
-          run: --cmd "scan url=http://testphp.vulnweb.com/ --scan-policy=default --report-type=html --report-file=zap-report.html"
+          
