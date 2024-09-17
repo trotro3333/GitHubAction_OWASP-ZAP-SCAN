@@ -1,12 +1,6 @@
 name: OWASP ZAP Integration with GitHub Actions
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push]
 
 jobs:
   zap_scan:
