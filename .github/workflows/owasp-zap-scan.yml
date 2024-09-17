@@ -15,7 +15,7 @@ jjobs:
         uses: zaproxy/action-baseline@v0.6.1
         with:
           token: ${{ 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 }}
-          docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
+          docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
