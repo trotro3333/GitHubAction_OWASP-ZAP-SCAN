@@ -20,8 +20,6 @@ jobs:
           cmd_options: '-config api.disablekey=true'
           fail_on_warning: true
 
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v2
-        with:
+        
           name: zap-report
           path: /github/home/.ZAP/reports/
