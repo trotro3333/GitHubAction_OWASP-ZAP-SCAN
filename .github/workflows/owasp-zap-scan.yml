@@ -5,17 +5,9 @@ on: [push]
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
-    name: Scan the web application
+    name: Scan ZAP website
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: main
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.6.1
+        uses: zaproxy/action-full-scan@v0.1.0
         with:
-          docker_name: 'zaproxy/zap-stable'
-          target: 'http://testphp.vulnweb.com/'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-config api.disablekey=true'
-          path: /github/home/.ZAP/reports/
+          target: 'https://www.zaproxy.org/'
