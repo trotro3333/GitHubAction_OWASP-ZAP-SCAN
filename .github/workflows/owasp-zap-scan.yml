@@ -1,33 +1,22 @@
-name: ZAP Scan
+name: OWASP ZAP Scan
+
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  zap-scan:
+  zap:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up ZAP
-        uses: actions/setup-java@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Start OWASP ZAP Scan
+        uses: zaproxy/action-full-scan@v0.4.0
         with:
-          java-version: '11'
-      - name: Download ZAP
-        run: |
-          curl -fsSL https://dl.bintray.com/zaproxy/zap/latest/zap-desktop-linux.sh -o zap.sh
-          chmod +x zap.sh
-          ./zap.sh
-      - name: Start ZAP
-        run: zap.sh -daemon
-      - name: Wait for ZAP to start
-        run: |
-          while ! nc -z localhost 8090; do
-            sleep 1
-          done
-      - name: Run ZAP scan
-        run: |
-          zap -cmd -zaphome /tmp/zap -config api.key=http://testphp.vulnweb.com/ -cmd api.key=http://testphp.vulnweb.com/ -cmd scan.url=http://testphp.vulnweb.com/ -cmd scan.context=http://testphp.vulnweb.com/ -cmd scan.policy=default -cmd scan.attack=quick -cmd scan.engine=spider
-      - name: Stop ZAP
-        run: zap.sh -shutdown
+          target: 'http://testphp.vulnweb.com/'
+          cmd_options: '-config api.disablekey=true'
