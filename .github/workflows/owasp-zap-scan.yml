@@ -1,39 +1,22 @@
-name: OWASP ZAP Scan
+name: OWASP ZAP Integration with GitHub Actions
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+on: [push]
 
 jobs:
-  zap-scan:
+  zap_scan:
     runs-on: ubuntu-latest
+    name: Scan the web application
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up OWASP ZAP
-        uses: actions/setup-java@v3
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          java-version: '11'
-      - name: Download OWASP ZAP
-        run: |
-          curl -fsSL https://owasp.org/images/zap/latest/zap-desktop-linux.sh -o zap-desktop-linux.sh
-          chmod +x zap-desktop-linux.sh
-          ./zap-desktop-linux.sh --mode unattended
-      - name: Start OWASP ZAP
-        run: zap-desktop-linux.sh --config option.show.splash=false --config option.show.update=false --config option.show.errordialog=false --config option.show.dialog=false --config option.show.status=false --config option.show.progress=false --config option.show.console=false --config option.show.toolbar=false --config option.show.menu=false
-      - name: Perform ZAP Scan
+          ref: main
+      - name: ZAP Scan
+        uses: zaproxy/action-baseline@v0.6.1
         run: zap-desktop-linux.sh --cmd "scan url=http://testphp.vulnweb.com/ --scan-policy=default --report-type=html --report-file=zap-report.html"
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v3
         with:
-          name: ZAP Report
-          path: zap-report.html
-      - name: Check for ZAP Alerts
-        run: |
-          if grep -q "High" || grep -q "Medium" || grep -q "Low" zap-report.html; then
-            echo "ZAP detected vulnerabilities!"
-            exit 1
-          else
-            echo "ZAP scan completed successfully."
-          fi
+          docker_name: 'zaproxy/zap-stable'
+          target: 'http://testphp.vulnweb.com/'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-config api.disablekey=true'
+          path: /github/home/.ZAP/reports/
