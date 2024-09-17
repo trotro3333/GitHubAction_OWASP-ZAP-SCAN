@@ -13,10 +13,9 @@ jobs:
           ref: main
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.6.1
-        run: zap-desktop-linux.sh --cmd "scan url=http://testphp.vulnweb.com/ --scan-policy=default --report-type=html --report-file=zap-report.html"
         with:
           docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-config api.disablekey=true'
-          path: /github/home/.ZAP/reports/
+          run: --cmd "scan url=http://testphp.vulnweb.com/ --scan-policy=default --report-type=html --report-file=zap-report.html"
