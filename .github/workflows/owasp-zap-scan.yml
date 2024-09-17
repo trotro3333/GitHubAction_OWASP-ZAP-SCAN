@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Start OWASP ZAP Scan
-        uses: zaproxy/action-full-scan@v0.4.0
+        uses: zaproxy/action-baseline@v0.6.1
         with:
           target: 'http://testphp.vulnweb.com/'
           cmd_options: '-config api.disablekey=true'
