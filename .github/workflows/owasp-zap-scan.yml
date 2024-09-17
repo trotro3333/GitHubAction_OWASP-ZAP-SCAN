@@ -12,7 +12,7 @@ jobs:
         with:
           ref: main
       - name: ZAP Scan
-        uses: zaproxy/action-baseline@v0.6.1
+        uses: zap-baseline.py -t http://testphp.vulnweb.com/
         with:
           docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
