@@ -23,5 +23,5 @@ jobs:
           docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
           rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-config api.disablekey=true'
+          cmd_options: '-config api.key=lfm37t24dktoo1mbd15ci1fjgd'
           
