@@ -16,4 +16,5 @@ jobs:
         with:
           docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
+          rules_file_name: 'zap/rules.tsv'
           cmd_options: '-a'
