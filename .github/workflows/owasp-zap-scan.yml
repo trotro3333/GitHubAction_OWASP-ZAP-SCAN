@@ -12,9 +12,9 @@ jobs:
         with:
           ref: main
       - name: ZAP Scan
-        uses: zap-baseline.py -t http://testphp.vulnweb.com/
+        uses: zaproxy/action-baseline@v0.6.1
         with:
           docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
           rules_file_name: '.zap/rules.tsv'
-          cmd_options: '--config api.disablekey=true'
+          cmd_options: '-config api.disablekey=true'
