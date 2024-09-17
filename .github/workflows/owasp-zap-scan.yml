@@ -28,6 +28,6 @@ jobs:
           done
       - name: Run ZAP scan
         run: |
-          zap -cmd -zaphome /tmp/zap -cmd scan.url=http://testphp.vulnweb.com/ -cmd scan.context=http://your-application-url -cmd scan.policy=default -cmd scan.attack=quick -cmd scan.engine=spider
+          zap -cmd -zaphome /tmp/zap -config api.key=http://testphp.vulnweb.com/ -cmd api.key=http://testphp.vulnweb.com/ -cmd scan.url=http://testphp.vulnweb.com/ -cmd scan.context=http://testphp.vulnweb.com/ -cmd scan.policy=default -cmd scan.attack=quick -cmd scan.engine=spider
       - name: Stop ZAP
         run: zap.sh -shutdown
