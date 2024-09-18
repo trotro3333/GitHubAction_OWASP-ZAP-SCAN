@@ -17,5 +17,8 @@ jobs:
           docker_name: 'zaproxy/zap-stable'
           target: 'http://testphp.vulnweb.com/'
           cmd_options: '-config api.disablekey=true'
-          path: /path/to/reports/report.json
+        
+        with:
+        name: zap-report
+        path: report.html  
           
